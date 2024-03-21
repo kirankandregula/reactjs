@@ -1,0 +1,29 @@
+.nav {
+    background-color: #3A833A;
+    color: #fff;
+    padding: 10px;
+    display: felx;
+    justify-content: center;
+  }
+  
+  .nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav ul li {
+    display: inline;
+    margin-right: 40px;
+    font-size: large;
+  }
+  
+  .nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .nav ul li a:hover {
+    color: yellow;
+  }
+  
