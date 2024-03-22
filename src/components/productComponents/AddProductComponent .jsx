@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import ProductService from '../../services/ProductService';
+import ProductService from '../services/ProductService';
 import { Link } from 'react-router-dom';
 
 const AddProductComponent = () => {
   const navigate = useNavigate();
   const { userName, userRole } = useParams();
   const [product, setProduct] = useState({
-    category: 'health',
+    category: '', // Set default value to an empty string
     name: '',
     price: 0
   });
@@ -20,13 +20,21 @@ const AddProductComponent = () => {
     e.preventDefault();
     try {
       console.log(product);
-      await ProductService.addHealthProduct(product);
+      // Conditionally call the appropriate ProductService method based on the selected category
+      if (product.category === 'health') {
+        await ProductService.addHealthProduct(product);
+      } else if (product.category === 'insurance') {
+        await ProductService.addInsuranceProduct(product);
+      } else {
+        throw new Error('Invalid category');
+      }
       alert('Product added successfully!');
       setProduct({
+        category: '', // Reset category to empty string
         name: '',
         price: 0
       });
-      navigate(`/admin/${userName}/${userRole}`);
+      navigate(`/${userRole}/${userName}/${userRole}`); // Navigate to the appropriate page based on user role
     } catch (error) {
       console.error('Error adding product:', error);
       alert('Error adding product. Please try again.');
@@ -43,6 +51,14 @@ const AddProductComponent = () => {
           <h2 className="card-title text-center mb-4">Add Product</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
+              <label htmlFor="productCategory" className="form-label">Category:</label>
+              <select id="productCategory" name="category" value={product.category} onChange={handleChange} className="form-select" required>
+                <option value="">Select Category</option>
+                <option value="health">Health</option>
+                <option value="insurance">Insurance</option>
+              </select>
+            </div>
+            <div className="mb-3">
               <label htmlFor="productName" className="form-label">Name:</label>
               <input type="text" id="productName" name="name" value={product.name} onChange={handleChange} className="form-control" required />
             </div>
@@ -56,7 +72,8 @@ const AddProductComponent = () => {
       </div>
 
       <div className="mt-3">
-        <Link to={`/admin/${userName}/${userRole}`} className="btn btn-secondary">Back</Link>
+        {/* Navigate to appropriate page based on user role */}
+        <Link to={`/${userRole}/${userName}/${userRole}`} className="btn btn-secondary">Back</Link>
       </div>
     </div>
   );

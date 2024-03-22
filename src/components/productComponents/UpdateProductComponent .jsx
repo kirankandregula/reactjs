@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {  useParams, useNavigate, Link } from 'react-router-dom';
-import ProductService from '../../services/ProductService';
+import ProductService from '../services/ProductService';
 
 const UpdateProductComponent = () => {
   const { id ,userName,userRole} = useParams();
@@ -65,7 +65,7 @@ const UpdateProductComponent = () => {
       </form>
 
       <div className="mt-3">
-        <Link to={`/admin/${userName}/${userRole}`} className="btn btn-danger">Back</Link>
+        <Link to={`/manager/${userName}/${userRole}`} className="btn btn-danger">Back</Link>
       </div>
     </div>
   );

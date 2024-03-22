@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import UserService from '../services/UserService';
-import { Link } from 'react-router-dom';
+import UserService from './services/UserService';
+
 
 import { useNavigate } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    UserService.loginUser(credentials)
+    UserService.login(credentials)
       .then(response => {
         const userData = response.data;
         setUserRole(userData.role); // Set the user's role after successful login
@@ -62,10 +62,8 @@ const LoginForm = () => {
               <label htmlFor="passWord" className="form-label">Password:</label>
               <input type="password" id="passWord" name="passWord" value={credentials.passWord} onChange={handleChange} className="form-control" required />
             </div>
-            <button type="submit" className="btn btn-primary w-100">Login</button>
-            <div className="mt-3">
-            <Link to="/" className="btn btn-primary">Home</Link>
-          </div>
+            <button type="submit" className="btn btn-primary w-100"  style={{backgroundColor: "#7700a6"}}>Login</button>
+           
           </form>
         </div>
       </div>

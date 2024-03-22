@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductService from '../../services/ProductService';
+import ProductService from '../services/ProductService';
 
 const DeleteProductComponent = ({ productId, onDelete }) => {
   const handleDelete = async () => {

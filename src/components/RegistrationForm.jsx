@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import UserService from '../services/UserService';
-import { Link } from 'react-router-dom';
+import UserService from './services/UserService';
+
 
 const RegistrationForm = () => {
   const [user, setUser] = useState({
@@ -61,12 +61,10 @@ const RegistrationForm = () => {
                 <option value="CUSTOMER">Customer</option>
               </select>
             </div>
-            <button type="submit" className="btn btn-success w-100">Register</button>
+            <button type="submit" className="btn btn-success w-100"  style={{backgroundColor: "#7700a6"}}>Register</button>
           </form>
           {successMessage && <p className="text-center text-success mt-3">{successMessage}</p>}
-          <div className="mt-3">
-            <Link to="/" className="btn btn-primary">Home</Link>
-          </div>
+        
         </div>
       </div>
     </div>
