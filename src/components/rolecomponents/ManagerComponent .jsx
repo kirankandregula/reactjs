@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import ProductService from '../services/ProductService';
 import UserService from '../services/UserService';
+import { useCookies } from 'react-cookie';
 
 const ManagerComponent = () => {
   const { userName, userRole } = useParams(); // Accessing dynamic parameters from the URL
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [, , removeCookie] = useCookies(['userName', 'userRole']); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProducts();
@@ -44,6 +47,12 @@ const ManagerComponent = () => {
     }
   };
 
+  const handleLogout = () => {
+    removeCookie('userName', { path: '/' });
+    removeCookie('userRole', { path: '/' });
+    navigate('/');
+  };
+
   const handleUserDelete = async (userId) => {
     try {
       await UserService.deleteUser(userId);
@@ -57,14 +66,26 @@ const ManagerComponent = () => {
 
   return (
     <div>
-      <h1 className='text-center'>Welcome {userName}</h1>
-      <h2 className='text-center'>Role: {userRole}</h2>
+    <div className='d-flex justify-content-end mt-5 mx-2 mb-2 text-end text-white'>
+      <div style={{ backgroundColor: '#c62fde', padding: '10px', borderRadius: '5px', display: 'inline-block' }}>
+        <h5 className='mt-2'>Welcome {userName}</h5>
+        <h6>Role: {userRole}</h6>
+      </div>
+    </div>
+        
 
+      <div className='d-flex justify-content-between'>
       <div className="mb-3">
         <Link to={`/add-product/${userName}/${userRole}`} className="btn btn-success mx-2">Add Product</Link>
         <Link to={`/add-user/${userName}/${userRole}`} className="btn btn-success mx-2">Add User</Link>
         <Link to={`/`} className="btn btn-success mx-2">Home</Link>
       </div>
+      <div className="text-center">
+        <button className="btn btn-danger mx-2" onClick={handleLogout}>Logout</button>
+      </div>
+      </div>
+
+     
 
       <div>
         <h2 className="text-center m-3">Products</h2>
@@ -114,9 +135,7 @@ const ManagerComponent = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3">
-        <Link to="/" className="btn btn-primary">Home</Link>
-      </div>
+     
     </div>
   );
 };

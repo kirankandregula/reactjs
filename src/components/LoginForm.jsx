@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserService from './services/UserService';
-
-
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie'; // Import useCookies from react-cookie
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({
@@ -12,8 +10,14 @@ const LoginForm = () => {
   });
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
-  const [userRole, setUserRole] = useState(null);
-  const [userName, setUserName] = useState(null);
+  const [cookies, setCookie] = useCookies(['userName', 'userRole']); // Use useCookies hook
+
+  useEffect(() => {
+    const { userName, userRole } = cookies;
+    if (userName && userRole) {
+      navigate(`/${userRole.toLowerCase()}/${userName}/${userRole}`);
+    }
+  }, [cookies, navigate]);
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -24,28 +28,15 @@ const LoginForm = () => {
     UserService.login(credentials)
       .then(response => {
         const userData = response.data;
-        setUserRole(userData.role); // Set the user's role after successful login
-        setUserName(userData.userName); // Set the user's name after successful login
+        setCookie('userName', userData.userName, { path: '/' }); // Set cookie for userName
+        setCookie('userRole', userData.role, { path: '/' }); // Set cookie for userRole
+        navigate(`/${userData.role.toLowerCase()}/${userData.userName}/${userData.role}`);
       })
       .catch(error => {
         console.error('Error logging in:', error);
         setErrorMessage('Invalid username or password');
       });
   };
-
-  // Conditional rendering based on user's role
-  if (userRole === 'ADMIN') {
-    navigate(`/admin/${userName}/${userRole}`);
-  return null; // Return null after navigation
-    
-  } else if (userRole === 'MANAGER') {
-
-    navigate(`/manager/${userName}/${userRole}`);
-    return null;
-  } else if (userRole === 'CUSTOMER') {
-    navigate(`/customer/${userName}/${userRole}`);
-    return null;
-  }
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
@@ -62,8 +53,8 @@ const LoginForm = () => {
               <label htmlFor="passWord" className="form-label">Password:</label>
               <input type="password" id="passWord" name="passWord" value={credentials.passWord} onChange={handleChange} className="form-control" required />
             </div>
-            <button type="submit" className="btn btn-primary w-100"  style={{backgroundColor: "#7700a6"}}>Login</button>
-           
+            <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#7700a6" }}>Login</button>
+            <Link className="nav-link card-title mt-3" to="/register">New User Registration</Link>
           </form>
         </div>
       </div>

@@ -2,7 +2,7 @@ import Carousel from 'react-bootstrap/Carousel';
 
 function DarkVariantExample() {
   return (
-    <Carousel data-bs-theme="dark" className='mt-5'>
+    <Carousel data-bs-theme="dark" className='mt-5' style={{marginBottom:"155px"}}>
       <div className="carousel-item active">
         <img
           className="d-block w-100"

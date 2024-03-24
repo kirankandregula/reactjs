@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import UserService from './services/UserService';
-
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const RegistrationForm = () => {
   const [user, setUser] = useState({
@@ -9,8 +10,9 @@ const RegistrationForm = () => {
     role: 'CUSTOMER' // Default role
   });
 
-  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -18,7 +20,7 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    UserService.registerUser(user)
+    UserService.addUser(user)
       .then(response => {
         console.log('User registered successfully:', response.data);
         // Display success message
@@ -32,7 +34,9 @@ const RegistrationForm = () => {
         // Hide success message after 3 seconds
         setTimeout(() => {
           setSuccessMessage('');
+          navigate('/');  
         }, 3000);
+       
       })
       .catch(error => {
         console.error('Error registering user:', error);
@@ -41,9 +45,9 @@ const RegistrationForm = () => {
 
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center vh-100">
-      <h1 className="text-center mb-4">User Registration</h1>
       <div className="card w-50">
         <div className="card-body">
+          <h1 className="text-center mb-4 card-title">User Registration</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="userName" className="form-label">Username:</label>
@@ -53,18 +57,10 @@ const RegistrationForm = () => {
               <label htmlFor="passWord" className="form-label">Password:</label>
               <input type="password" id="passWord" name="passWord" value={user.passWord} onChange={handleChange} className="form-control" required />
             </div>
-            <div className="mb-3">
-              <label htmlFor="role" className="form-label">Role:</label>
-              <select id="role" name="role" value={user.role} onChange={handleChange} className="form-select">
-                <option value="ADMIN">Admin</option>
-                <option value="MANAGER">Manager</option>
-                <option value="CUSTOMER">Customer</option>
-              </select>
-            </div>
-            <button type="submit" className="btn btn-success w-100"  style={{backgroundColor: "#7700a6"}}>Register</button>
+            <button type="submit" className="btn btn-success w-100" style={{ backgroundColor: "#7700a6" }}>Register</button>
+            <Link className="nav-link card-title mt-3" to="/login">Already User? Login</Link>
           </form>
           {successMessage && <p className="text-center text-success mt-3">{successMessage}</p>}
-        
         </div>
       </div>
     </div>
