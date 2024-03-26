@@ -48,7 +48,7 @@ const UpdateProductComponent = () => {
   }
 
   return (
-    <div className="bg-dark p-4">
+    <div className="bg-dark p-4 mt-5">
       <h2 className="text-white text-center">Update Product</h2>
       <h3 className="text-white text-center">Admin Name: {userName}</h3> {/* Display admin name */}
       <h3 className="text-white text-center">Admin Role: {userRole}</h3> {/* Display admin role */}

@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutPage = () => {
   return (
-    <div style={{ color: '#7700a6', minHeight: '100vh', padding: '20px',marginTop:"40px" }}>
+    <div style={{ color: '#7700a6', minHeight: '100vh', padding: '20px',marginTop:"70px" }}>
       <h1 className="text-center ">About Us</h1>
       <p className="text-center ">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit, lectus sed vulputate facilisis, ligula

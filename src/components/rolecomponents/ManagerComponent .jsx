@@ -68,7 +68,7 @@ const ManagerComponent = () => {
     <div>
     <div className='d-flex justify-content-end mt-5 mx-2 mb-2 text-end text-white'>
       <div style={{ backgroundColor: '#c62fde', padding: '10px', borderRadius: '5px', display: 'inline-block' }}>
-        <h5 className='mt-2'>Welcome {userName}</h5>
+        <h5 className='mt-2'>Welcome {userName.toUpperCase()}</h5>
         <h6>Role: {userRole}</h6>
       </div>
     </div>

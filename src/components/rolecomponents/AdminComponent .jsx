@@ -65,7 +65,7 @@ const AdminComponent = () => {
       <div className="container">
         <div className='d-flex justify-content-end mt-5  mb-2 text-end text-white'>
           <div style={{ backgroundColor: '#c62fde', padding: '10px', borderRadius: '5px', display: 'inline-block' }}>
-            <h5 className='mt-2'>Welcome {userName}</h5>
+            <h5 className='mt-2'>Welcome {userName.toUpperCase()}</h5>
             <h6>Role: {userRole}</h6>
           </div>
         </div>
@@ -85,7 +85,7 @@ const AdminComponent = () => {
               {/* Cards on the left side */}
               <div className="mb-2">
                 <div className="card shadow" onClick={handleHealthCardClick}>
-                  <img src="https://img.freepik.com/free-photo/medical-banner-with-stethoscope_23-2149611199.jpg?size=626&ext=jpg" className="card-img-top" alt="Doctor with Stethoscope" style={{ width: '180px', height: '180px' }} />
+                  <img src="https://img.freepik.com/free-photo/medical-banner-with-stethoscope_23-2149611199.jpg?size=626&ext=jpg" className="card-img-top" alt="Doctor with Stethoscope" style={{ width: '160px', height: '180px' }} />
                   <div className="card-body">
                     <h6 className="card-title">View Health Services</h6>
                   </div>

@@ -84,9 +84,9 @@ const RenderProducts = () => {
       {/* Cards on the left side */}
       <div className="mb-2">
         <div className="card shadow" onClick={handleHealthCardClick}>
-          <img src="https://img.freepik.com/free-photo/medical-banner-with-stethoscope_23-2149611199.jpg?size=626&ext=jpg" className="card-img-top" alt="Doctor with Stethoscope" style={{ width: '180px', height: '180px' }} />
+          <img src="https://img.freepik.com/free-photo/medical-banner-with-stethoscope_23-2149611199.jpg?size=626&ext=jpg" className="card-img-top" alt="Doctor with Stethoscope" style={{ width: '164px', height: '180px' }} />
           <div className="card-body">
-            <h6 className="card-title">View Health Products</h6>
+            <h6 className="card-title">View Health Services</h6>
           </div>
         </div>
       </div>
@@ -117,7 +117,7 @@ const RenderProducts = () => {
             {products.map(product => (
               <tr key={product.id}>
                 <td>{product.name.toUpperCase()}</td>
-                <td>${product.price}</td>
+                <td>₹{product.price}</td>
                 <td>
                   {/* Only View and Buy buttons for customers */}
                   <button className="btn btn-primary mx-2" onClick={() => handleViewProduct(product.id)}>View</button>
