@@ -101,7 +101,7 @@ const ManagerComponent = () => {
             {products.map(product => (
               <tr key={product.id}>
                 <td>{product.name.toUpperCase()}</td>
-                <td>${product.price}</td>
+                <td>₹{product.price}</td>
                 <td>
                   {/* Include name and role in the URL */}
                   <Link to={{ pathname: `/update/${product.id}/${userName}/${userRole}`}} className="btn btn-outline-success mx-2">Update</Link>

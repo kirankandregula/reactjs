@@ -48,10 +48,10 @@ const UpdateUserComponent = () => {
   }
 
   return (
-    <div className="bg-dark p-4">
+    <div className="bg-dark p-4 mt-4">
       <h2 className="text-white text-center">Update User</h2>
-      <h3 className="text-white text-center">Admin Name: {userName}</h3> 
-      <h3 className="text-white text-center">Admin Role: {userRole}</h3> 
+      <h3 className="text-white text-center">Name: {userName.toUpperCase()}</h3> 
+      <h3 className="text-white text-center">Role: {userRole}</h3> 
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label text-white">Username:</label>

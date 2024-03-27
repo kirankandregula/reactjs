@@ -50,8 +50,8 @@ const UpdateProductComponent = () => {
   return (
     <div className="bg-dark p-4 mt-5">
       <h2 className="text-white text-center">Update Product</h2>
-      <h3 className="text-white text-center">Admin Name: {userName}</h3> {/* Display admin name */}
-      <h3 className="text-white text-center">Admin Role: {userRole}</h3> {/* Display admin role */}
+      <h3 className="text-white text-center"> Name: {userName.toUpperCase()}</h3> {/* Display admin name */}
+      <h3 className="text-white text-center"> Role: {userRole}</h3> {/* Display admin role */}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label text-white">Name:</label>
@@ -65,7 +65,7 @@ const UpdateProductComponent = () => {
       </form>
 
       <div className="mt-3">
-        <Link to={`/manager/${userName}/${userRole}`} className="btn btn-danger">Back</Link>
+        <Link to={`/${userRole}/${userName}/${userRole}`} className="btn btn-danger">Back</Link>
       </div>
     </div>
   );

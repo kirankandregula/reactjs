@@ -12,6 +12,9 @@ const RenderProducts = () => {
     const navigate = useNavigate();
     const [, , removeCookie] = useCookies(['userName', 'userRole']); 
 
+
+    console.log("in the console.....******");
+
     useEffect(() => {
       fetchProducts();
     }, [showHealthProducts]); // Include showHealthProducts in the dependency array
